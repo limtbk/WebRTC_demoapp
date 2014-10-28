@@ -3,7 +3,6 @@ echo "-- fetching webrtc"
 gclient config --name src http://webrtc.googlecode.com/svn/trunk/
 echo "target_os = ['mac']" >> .gclient
 gclient sync
-
 sed -i "" '$d' .gclient
 echo "target_os = ['ios', 'mac']" >> .gclient
 gclient sync
@@ -23,26 +22,13 @@ export GYP_GENERATOR_FLAGS="$GYP_GENERATOR_FLAGS output_dir=out_sim"
 export GYP_CROSSCOMPILE=1
 }
 
-function wrmac() {
-wrbase
-export GYP_DEFINES="$GYP_DEFINES OS=mac target_arch=x64"
-export GYP_GENERATOR_FLAGS="$GYP_GENERATOR_FLAGS output_dir=out_mac"
-}
-
 function build() {
 echo "-- building webrtc"
 pushd src
 gclient runhooks
-ninja -C out_sim/Debug iossim AppRTCDemo
+ninja -v -j 4 -C out_sim/Debug iossim AppRTCDemo
 popd
 echo "-- webrtc has been sucessfully built"
-}
-
-function run() {
-echo "-- running webrtc appdemo"
-pushd src
-./out_sim/Debug/iossim out_sim/Debug/AppRTCDemo.app
-popd
 }
 
 function fail() {
@@ -50,7 +36,6 @@ echo "*** webrtc build failed"
 exit 1
 }
 
-#fetch || fail
+fetch || fail
 wrsim || fail
 build || fail
-run || fail
