@@ -13,4 +13,4 @@ http://www.webrtc.org/reference/getting-started
 
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
-2) copy to work directory and run makeall-iossim.sh for build and run on simulator, and makeall-iosdevice.sh for phone. Fetch will take a lot of time. After build copy .a files from /src/out_sim/Debug or /src/out_ios/Debug-iphoneos to libs directory in WebRTCTest.
+2) copy to work directory, uncomment line '#fetch || fail' for first time, and run makeall-iossim.sh for build and run on simulator, and makeall-iosdevice.sh for phone. Fetch will take a lot of time. After build copy .a files from /src/out_sim/Debug or /src/out_ios/Debug-iphoneos to libs directory in WebRTCTest.
