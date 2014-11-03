@@ -37,6 +37,6 @@ echo "*** webrtc build failed"
 exit 1
 }
  
-#fetch || fail
+fetch || fail
 wrios || fail
 buildios || fail
